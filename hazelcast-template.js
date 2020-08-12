@@ -1,4 +1,24 @@
-"spec": {
+
+
+    {
+    "apiVersion": "v1",
+    "kind": "ReplicationController",
+    "metadata": {
+        "generateName": "hazelcast-cluster-rc-${DEPLOYMENT_NAME}-"
+    },
+    "spec": { 
+        "replicas": 3,
+        "selector": {
+            "name": "hazelcast-node-${DEPLOYMENT_NAME}"
+    }, 
+    "template": { 
+        "metadata": { 
+            "name": "hazelcast-node", 
+            "generateName": "hazelcast-node-${DEPLOYMENT_NAME}-", 
+            "labels": { 
+                "name": "hazelcast-node-${DEPLOYMENT_NAME}"
+            } 
+    }, "spec": {
     "containers": [{ 
         "image": "noctarius/hazelcast-openshift:latest",
         "name": "hazelcast-openshift",
@@ -24,3 +44,4 @@
          }] 
     }] 
     }
+    }, "triggers": { "type": "ImageChange" } } }
